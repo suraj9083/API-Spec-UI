@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <header>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    </header>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class='box ease'></div>
+        </div>
+        <div class="file">
+            <p>Upload you API spec file in JSON or YAML</p>
+            <form>
+                <label for="file-input">Select a file:</label>
+                <input type="file" id="file-input" name="file-input" (click)="fileInput()"
+                    (change)="onFileSelected($event)">
+                <input type="text" id="file-name" readonly>
+            </form>
+            <button *ngIf="submitBtn" (click)="onSubmit();">Submit</button>
+        </div>
+        <ng-container *ngIf="routes">
+            <div class="content">
+                <h2>Server</h2>
+                <div class="inSingleLine">
+                    <p>Your server is =======>> </p>
+                    <h3> {{server}}</h3>
+                </div>
+                <h1>Paths</h1>
+                <div *ngFor="let i of paths.slice(0, limit)">
+                    <table style="display: block; margin: auto;">
+                        <tr>
+                            <td>{{i}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <p *ngIf="paths.length > limit">+{{ paths.length - limit }} more</p>
+                <div class="buttons">
+                    <button class="btn btn-white" *ngIf="limit < pathsCount" (click)="showMoreLimit()">Show
+                        more</button>
+                </div>
+                <h4 style="color: burlywood;">Total paths found {{pathsCount}}</h4>
+                <br><br><br>
+                <span style="font-size: 1.3rem;">Want to see full route ??</span>
+                <br>
+                <ng-container>
+                    <div *ngIf="btnFlag; else elsBtn">
+                        <button class="wantBtn" (click)="doTrue()">Click to see full routes</button>
+                    </div>
+                    <ng-template #elsBtn>
+                        <button class="disableBtn">Click to see full routes</button>
+                    </ng-template>
+                </ng-container>
+                <ng-container *ngIf="fullRoutes">
+                    <div *ngFor="let item of allRoutes.slice(0, numItemsToShow)">
+                        {{item.route}}
+                    </div>
+                    <p *ngIf="allRoutes.length > numItemsToShow">+{{ paths.length - numItemsToShow }} more</p>
+                    <div class="buttons">
+                        <button class="btn btn-white" *ngIf="numItemsToShow < pathsCount" (click)="showMore()">Show
+                            more</button>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</body>
+
+</html>
