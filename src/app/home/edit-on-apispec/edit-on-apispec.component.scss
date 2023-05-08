@@ -1,42 +1,80 @@
-* {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-}
-
 body {
-    // background-color: #201f1f;
-    margin-top: auto;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #000000;
+    background-image: linear-gradient(147deg, #2c2929 0%, #2c3e50 74%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    overflow-y: scroll;
+
 }
 
-// p{
-//     color: #A163F7;
-// }
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
 
-form {
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.head {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.selectFile {
+    height: 210px;
+    width: 130%;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: #f1f1f1;
+    margin-bottom: 35%;
+}
+
+.uploadTxt {
+    margin-top: 11px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 56px;
+}
+
+.selecDiv {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-label {
+.selectFile label {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     margin-left: 55px;
-    color: black;
+    color: rgb(35, 82, 212);
     margin-top: 50px;
+    text-decoration: underline;
     cursor: pointer;
 }
 
-input[type="file"] {
+.selectFile input[type="file"] {
     display: none;
 }
 
-input[type="radio"] {
+.selectFile input[type="radio"] {
     width: 20px;
     height: 20px;
 }
 
-input {
+.selectFile input {
     width: 266px;
     height: 10px;
     padding: 15px;
@@ -47,10 +85,6 @@ input {
     font-family: Arial, sans-serif;
     resize: none;
     box-sizing: border-box;
-}
-
-.inSingle {
-    display: inline-block;
 }
 
 .submitBtn {
@@ -65,17 +99,17 @@ input {
     cursor: pointer;
 }
 
-.submitBtn1 {
-    margin-left: 154px;
-    margin-top: 15px;
-    background: transparent;
-    color: #6a5858;
-    width: 75px;
-    height: 35px;
-    border: 1px solid #8c8298;
-    border-radius: 8px;
-    cursor: pointer;
-}
+// .submitBtn1 {
+//     margin-left: 154px;
+//     margin-top: 15px;
+//     background: transparent;
+//     color: #6a5858;
+//     width: 75px;
+//     height: 35px;
+//     border: 1px solid #8c8298;
+//     border-radius: 8px;
+//     cursor: pointer;
+// }
 
 .filename {
     width: 266px;
@@ -94,7 +128,6 @@ input {
     width: 90px;
     height: 30px;
     background: aliceblue;
-    /* display: inline-flex; */
     margin: 20px;
     cursor: pointer;
 }
@@ -111,153 +144,365 @@ input {
     }
 }
 
-.form {
-    position: absolute;
-    top: 30%;
-    left: 10%;
-    width: 80%;
-    height: 100%;
-    border: 1px solid black;
-}
-
-::ng-deep .forKp {
-    position: relative;
-    top: 10px;
-    padding: 15px;
-}
-
-.forMethod {
-    padding: 20px;
-}
-
-.tag {
-    padding: 15px;
-}
-
-.reqDis {
-    display: flex;
-    flex-direction: column;
-    // padding: 15px;
-    margin-bottom: 100px;
-}
-
-.reqSchema {
+.radio-methods {
+    width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    gap: 3rem;
+
+    .radio input {
+        margin-left: 10px;
+    }
 }
 
-.schema {
-    position: absolute;
-    top: 30%;
+.tag-des {
     display: flex;
     flex-direction: column;
-    margin-bottom: 100px;
+    margin-top: 10px;
+    margin-right: 266px;
 }
 
-.schemaType {
+.description input {
+    margin-left: 65px;
+    margin-top: 10px;
+}
+
+.reqname input {
+    margin-left: 87px;
+    margin-top: 10px;
+}
+
+.reqtype input {
+    margin-top: 10px;
+    margin-left: 96px;
+}
+
+.resname input {
+    margin-top: 10px;
+    margin-left: 75px;
+}
+
+.restype input {
+    margin-top: 10px;
+    margin-left: 84px;
+}
+
+#input-box {
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #fdf8f8;
+    margin-top: 25px;
+    margin-right: 260px;
     position: absolute;
-    top: 30%;
-    left: 40%;
+}
+
+#input-box1 {
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #fdf8f8;
+    margin-top: 25px;
+    margin-left: 50px;
+    position: absolute;
+}
+
+
+.added-path {
+    width: 100%;
+    min-width: 80px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 3px;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 100px;
+    justify-content: center;
 }
 
-.schemaBtn {
-    color: black;
-    width: 250px;
-    height: 35px;
-    border: 1px solid #000;
-    border-radius: 8px;
-    position: absolute;
-    top: 45%;
-    left: 4%;
+.added-path input {
+    width: 110px;
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 50px;
+    border: none;
+    box-shadow: 2px 2px 0px rgb(0 0 0 / 10%);
+}
+
+.container-form {
+    margin: auto;
+    inset: 0;
+    margin-top: 35px;
+    max-width: 800px;
+    padding: 30px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+// .key, .description, .reqname, .reqtype, .resname, .restype {
+//     display: inline-block;
+//     vertical-align: top;
+//     margin-right: 40px;
+// }
+
+.key input {
+    margin-left: 20px;
+}
+
+.key input[type=text],
+.tag-des input[type=text],
+.description input[type=text],
+.reqname input[type=text],
+.reqtype input[type=text],
+.restype input[type=text],
+.resname input[type=text],
+.tag-des textarea,
+.description input[type=text] {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    // margin-left: 65px;
+    // margin-top: 10px;
+}
+
+.tag-des textarea {
+    height: 80px;
+    resize: none;
+}
+
+.radio-methods {
+    margin-bottom: 20px;
+}
+
+.radio {
+    margin-right: 20px;
+}
+
+.radio input[type=radio] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.radio label {
+    font-weight: bold;
+}
+
+.reqprop {
+    margin-top: 20px;
+}
+
+.nametype,
+.re-nametype {
+    margin-top: 10px;
+}
+
+.name {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+}
+
+.typee {
+    width: 140px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 2px 2px 0px rgb(0 0 0 / 10%);
+    margin-right: 10px;
+}
+
+.addBtn {
+    background-color: #008CBA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
-}
-
-.nametype {
-    position: relative;
-    top: 90px;
-    left: 4%;
 }
 
 .rmBtn {
-    background: rgb(184, 66, 66);
-    color: white;
-    width: 75px;
-    height: 30px;
-    border: 1px solid #fff;
-    border-radius: 8px;
-    margin-left: 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
+.more-path {
+    background-color: #1aba00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
-// ##########################################
-
-.resSchema {
+.moreBtn {
     display: flex;
-    flex-direction: row;
+    justify-content: flex-end;
 }
 
-.re-schema {
-    position: absolute;
-    top: 60%;
+.sBtn {
+    background-color: #0006ba;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 1px solid white;
+}
+
+.submitt {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 100px;
+    justify-content: center;
 }
 
-.re-schemaType {
-    position: absolute;
-    top: 60%;
-    left: 40%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 100px;
-}
 
-.re-schemaBtn {
-    color: black;
-    width: 250px;
-    height: 35px;
-    border-radius: 8px;
-    position: absolute;
-    top: 5%;
-    left: 4%;
+.small-box {
+    width: 50px;
+    height: 50px;
+    background-color: lightblue;
     cursor: pointer;
 }
 
-.resSchemProp {
-    position: absolute;
-    top: 75%;
-    width: 100%;
-    height: 50%;
+
+.large-box {
+    width: 300px;
+    height: 300px;
+    background-color: lightblue;
+    cursor: pointer;
+    overflow: auto;
 }
 
-.re-nametype {
+.getColor {
+    background-color: #61affe;
+    width: 109px;
+    height: 39px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 3px;
+    left: 6px;
+}
+
+.postColor {
+    background-color: #49cc90;
+    width: 109px;
+    height: 39px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 3px;
+    left: 6px;
+}
+
+.forAddPath {
     position: relative;
-    top: 85px;
-    left: 4%;
 }
 
-.re-rmBtn {
-    background: rgb(184, 66, 66);
-    color: white;
-    width: 75px;
-    height: 30px;
-    border: 1px solid #fff;
-    border-radius: 8px;
-    margin-left: 10px;
+.addPathinp {
+    width: 100%;
+    height: 43px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: #c4dcf4;
+    margin-top: 10px;
 }
 
-::ng-deep .submit {
+.addPathinp1 {
+    width: 100%;
+    height: 43px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: #ccecdd;
+    margin-top: 10px;
+}
+
+.addpathKP {
     position: absolute;
-    top: 137%;
-    background: #000;
-    color: white;
-    left: 48%;
-    width: 97px;
-    height: 37px;
-    border-radius: 13px;
-    font-size: 18px;
+    color: black;
+    top: 23px;
+    left: 21%;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.edit{
+    position: absolute;
+    top: 15px;
+    color: black;
+    right: 27px;
+    letter-spacing: 2px;
+    background-color: transparent;
+    border: 1px solid black;
+    width: 75px;
+    height: 35px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+// .card {
+//     background-image: linear-gradient(to right top, #00f4be, #00c1cb, #008bc5, #0054a3, #021d67);
+//     border-radius: 22px;
+//     transition: all .3s;
+//   }
+//   .card:hover {
+//     box-shadow: 0 0 30px 1px rgba(137, 196, 244, .3);
+//   }
+
+//   .card .card2 {
+//     border-radius: 0;
+//     transition: all .2s;
+//   }
+//   .card .card2:hover {
+//     transform: scale(0.98);
+//     border-radius: 20px;
+//   }
+//   .card .card2 .form {
+//     display: flex;
+//     flex-direction: column;
+//     margin-top: 1rem;
+//     gap: 10px;
+//     padding: 0.4rem 2rem;
+//     background-color: #f1f1f1;
+//     border-radius: 20px;
+//   }
+
+.delete-icon{
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
 }

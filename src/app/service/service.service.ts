@@ -25,7 +25,7 @@ export class ServiceService {
   addData(body: any): Promise<any> {
     console.log("addData api called");
     return new Promise((resolve, reject) => {
-      this.http.post(this.url + `/api/tempdyno/v1/addData?filename=${body.filename}&fileType=${body.filetype}`, body).pipe(map(Response => Response))
+      this.http.post(this.url + `/api/tempdyno/v1/addData?filename=${body[0].filename}&fileType=${body[0].filetype}`, body).pipe(map(Response => Response))
         .subscribe((response: any) => {
           // console.log("resend otp API response:", response)
           resolve(response);

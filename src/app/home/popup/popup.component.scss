@@ -1,0 +1,17 @@
+.filename {
+    width: 266px;
+    height: 10px;
+    padding: 15px;
+    margin-left: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.downl {
+    display: flex;
+    flex-direction: column;
+}

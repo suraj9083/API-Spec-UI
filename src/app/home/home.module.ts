@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
@@ -11,13 +11,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormsModule } from '@angular/forms';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     SpecreaderPageComponent,
     PopupComponent,
-    EditOnApispecComponent
+    EditOnApispecComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +33,14 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatOptionModule,
+    MatSelectModule,
     FormsModule
+    
   ],
   exports: [
     MatButtonModule,

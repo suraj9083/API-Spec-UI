@@ -9,112 +9,185 @@
 </head>
 
 <body>
+    <app-header class="head"></app-header>
     <div class="container">
-        <form>
-            <label for="file-input">Select a file:</label>
-            <input type="file" id="file-input" name="file-input" (click)="fileInput()"
-                (change)="onFileSelected($event)">
-            <input type="text" id="file-name" readonly>
-        </form>
-        <button *ngIf="submitBtn" class="submitBtn" (click)="onSubmit()">Submit</button>
-        <button disabled *ngIf="submitBtn1" class="submitBtn1">Submit</button>
-        <!-- <button disabled class="submitBtn1">Submit</button> -->
+        <div class="selectFile" *ngIf="selectfile">
+            <form>
+                <div class="selecDiv">
+                    <label for="file-input">Select a file:</label>
+                    <input type="file" id="file-input" name="file-input" (click)="fileInput()"
+                        (change)="onFileSelected($event)">
+                    <input type="text" id="file-name" readonly>
+                    <span class="uploadTxt">Upload file with extension .yaml or .json</span>
+                </div>
+            </form>
+            <button *ngIf="submitBtn" class="submitBtn" (click)="onSubmit()">Submit</button>
+            <!-- <button disabled *ngIf="submitBtn1" class="submitBtn1">Submit</button> -->
+            <!-- <button disabled class="submitBtn1">Submit</button> -->
+        </div>
 
-        <ng-container *ngIf="showFileName">
-            <!-- <ng-container> -->
-            <h4 style="color: black">File Successfully readed and this is a filename given from server</h4>
+        <!-- ###################### CANCEL ################################# -->
+        <!-- <ng-container *ngIf="showFileName"> -->
+        <!-- <ng-container> -->
+        <!-- <h4 style="color: black">File Successfully readed and this is a filename given from server</h4>
             <label style="color: black;">Filename : </label>
             <input type="text" class="filename" [value]="fileName" readonly>
-        </ng-container>
+        </ng-container> -->
 
-        <ng-container *ngIf="showFileName">
-            <div class="validateFile">
+        <!-- ###################### CANCEL ################################# -->
+        <!-- <ng-container *ngIf="showFileName"> -->
+        <!-- <ng-container> -->
+        <!-- <div class="validateFile">
                 <h2 style="color: black">Paste your file name for validation</h2>
                 <label style="color: black;">Filename : </label>
                 <input type="text" class="filename" placeholder="File name - f5edwe42uyc" #takename>
                 <button class="validateBtn" (click)="validateFilename(takename.value)">Validate</button>
             </div>
-        </ng-container>
+        </ng-container> -->
 
+        <!-- <ng-container *ngIf="addPath"> -->
+        <!-- <ng-container> -->
+        <!-- <div class="added-path">
+                <label id="input-box">Get</label>
+                <input style="background-color: #61affe;" type="text" name="" id="" [value]="addgetPathCount" readonly>
+                <label id="input-box1">Post</label>
+                <input style="background-color: #49cc90;" type="text" name="" id="" [value]="addpostPathCount" readonly>
+            </div>
+        </ng-container> -->
+
+        <div *ngFor="let item of dataFromUser" #box>
+            <div class="forAddPath">
+                <input type="text" class="addPathinp" [ngClass]="{'addPathinp1':item.method == 'post'}" readonly>
+                <button class="getColor" [ngClass]="{'postColor':item.method == 'post'}" ngDefaultControl
+                    [(ngModel)]="formData" [ngModelOptions]="{standalone: true}"> {{item.tag}} </button>
+                <p class="addpathKP"> {{ item.keyPath }} </p>
+                <button class="edit" (click)="replaceData(item.tag)">Edit</button>
+                <i class="fa-solid fa-trash fa-beat-fade" style="color: red; font-size: 20px; position: absolute;
+                top: 20px;
+                right: -29px; cursor: pointer;" (click)="deleteRoute(item.keyPath)"></i>
+            </div>
+        </div>
+
+        <!-- *ngIf="fileValid" -->
         <ng-container *ngIf="fileValid">
-            <form #myForm="ngForm">
-                <div class="form">
-                    <div class="forKp">
-                        <label>Key Path</label>
-                        <input type="text" placeholder="/api/test/v1" id="kp" name="kp" [(ngModel)]="formData.keyPath">
+            <!-- <div class="card">
+                <div class="card2"> -->
+            <form #myForm="ngForm" class="form">
+                <div class="container-form">
+                    <div class="key">
+                        <label for="kp">Key Path</label>
+                        <input type="text" placeholder="/api/test/v1" id="kp" name="kp" ngDefaultControl
+                            [(ngModel)]="formData.keyPath" [required]="true" #kp="ngModel">
                     </div>
-                    <div class="forMethod">
-                        <label>Method</label>
-                        <label>POST</label>
-                        <input type="radio" [(ngModel)]="formData.method" value="post"
-                            [ngModelOptions]="{standalone: true}">
-                        <label>GET</label>
-                        <input type="radio" [(ngModel)]="formData.method" value="get"
-                            [ngModelOptions]="{standalone: true}">
-                    </div>
-                    <div class="tag">
-                        <label>Tag</label>
-                        <input type="text" id="tag" name="tag" [(ngModel)]="formData.tag">
-                        <label>Discription</label>
-                        <input type="text" id="discription" name="discription" [(ngModel)]="formData.discription">
-                    </div>
-                    <div class="reqDis">
-                        <label>Discription for request body</label>
-                        <input type="text" id="reqDis" name="reqDis" [(ngModel)]="formData.reqDis">
-                    </div>
-                    <div class="reqSchema">
-                        <div class="schema">
-                            <label>Request schemas name</label>
-                            <input type="text" id="reqSchema" name="reqSchema" [(ngModel)]="formData.reqSchema">
+                    <div class="">
+                        <div class="radio-methods">
+                            <label>Method</label>
+                            <div class="radio">
+                                <label>POST</label>
+                                <input type="radio" name="post" ngDefaultControl [(ngModel)]="formData.method"
+                                    value="post" [ngModelOptions]="{standalone: true}" (change)="takeMethod($event)">
+                            </div>
+                            <div class="radio">
+                                <label>GET</label>
+                                <input type="radio" name="get" ngDefaultControl [(ngModel)]="formData.method"
+                                    value="get" [ngModelOptions]="{standalone: true}" (change)="takeMethod($event)">
+                            </div>
                         </div>
-                        <div class="schemaType">
+
+                    </div>
+                    <div class="tag-des">
+                        <label>Tag</label>
+                        <input type="text" id="tag" name="tag" ngDefaultControl [(ngModel)]="formData.tag">
+                        <label>Discription</label>
+                        <textarea type="text" id="discription" name="discription" ngDefaultControl
+                            [(ngModel)]="formData.discription"></textarea>
+                    </div>
+                    <div class="description">
+                        <label>Discription for request body</label>
+                        <input type="text" id="reqDis" name="reqDis" ngDefaultControl [(ngModel)]="formData.reqDis">
+                    </div>
+                    <div class="">
+                        <div class="reqname">
+                            <label>Request schemas name</label>
+                            <input type="text" id="reqSchema" name="reqSchema" ngDefaultControl
+                                [(ngModel)]="formData.reqSchema">
+                        </div>
+                        <div class="reqtype">
                             <label>Request schemas type</label>
                             <input type="text" id="schemaType" name="schemaType" value="object" readonly>
                         </div>
                     </div>
-                    <div class="reqSchemProp">
-                        <button class="schemaBtn" (click)="addInput()">Add Request Schema Properties</button>
+                    <div class="reqprop" *ngIf="isPost">
+                        <button class="" (click)="addInput()" class="addBtn">Add Request Schema
+                            Properties</button>
                         <div *ngFor="let input of inputs" class="nametype">
-                            <input type="text" [(ngModel)]="input.name" placeholder="Name"
+                            <input type="text" class="name" ngDefaultControl [(ngModel)]="input.name" placeholder="Name"
                                 [ngModelOptions]="{ standalone: true }">
-                            <input type="text" [(ngModel)]="input.type" placeholder="Type"
+                            <select class="typee" ngDefaultControl [(ngModel)]="input.type"
                                 [ngModelOptions]="{ standalone: true }">
+                                <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">
+                                    {{typeOption.value}}</option>
+                            </select>
                             <button (click)="removeInput(input)" class="rmBtn">Remove</button>
                         </div>
-                        <!-- <button>Submit</button> -->
                     </div>
-                    <div class="resSchema">
-                        <div class="re-schema">
-                            <label>Response schemas name</label>
-                            <input type="text" id="resSchema" name="resSchema" [(ngModel)]="formData.resSchema">
+                    <div class="reqprop" *ngIf="isGet">
+                        <button class="" (click)="addInput()" class="addBtn">Add Parameters Schema
+                            Properties</button>
+                        <div *ngFor="let input of inputs" class="nametype">
+                            <input type="text" class="name" ngDefaultControl [(ngModel)]="input.name" placeholder="Name"
+                                [ngModelOptions]="{ standalone: true }">
+                            <select class="typee" ngDefaultControl [(ngModel)]="input.type"
+                                [ngModelOptions]="{ standalone: true }">
+                                <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">
+                                    {{typeOption.value}}</option>
+                            </select>
+                            <button (click)="removeInput(input)" class="rmBtn">Remove</button>
                         </div>
-                        <div class="re-schemaType">
+                    </div>
+                    <div class="">
+                        <div class="resname">
+                            <label>Response schemas name</label>
+                            <input type="text" id="resSchema" name="resSchema" ngDefaultControl
+                                [(ngModel)]="formData.resSchema">
+                        </div>
+                        <div class="restype">
                             <label>Response schemas type</label>
                             <input type="text" id="schemaType" name="schemaType" value="object" readonly>
                         </div>
                     </div>
-                    <div class="resSchemProp">
-                        <button class="re-schemaBtn" (click)="addInput1()">Add Response Schema Properties</button>
+                    <div class="reqprop">
+                        <button (click)="addInput1()" class="addBtn">Add Response Schema Properties</button>
                         <div *ngFor="let input of inputs1" class="re-nametype">
-                            <input type="text" [(ngModel)]="input.name1" placeholder="Name1"
+                            <input type="text" class="name" ngDefaultControl [(ngModel)]="input.name1"
+                                placeholder="Name" [ngModelOptions]="{ standalone: true }">
+                            <select class="typee" ngDefaultControl [(ngModel)]="input.type1"
                                 [ngModelOptions]="{ standalone: true }">
-                            <input type="text" [(ngModel)]="input.type1" placeholder="Type1"
-                                [ngModelOptions]="{ standalone: true }">
-                            <button (click)="removeInput1(input)" class="re-rmBtn">Remove</button>
+                                <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">
+                                    {{typeOption.value}}</option>
+                            </select>
+                            <button (click)="removeInput1(input)" class="rmBtn">Remove</button>
                         </div>
                         <!-- <button>Submit</button> -->
                     </div>
+                    <div *ngIf="moreBtn" class="moreBtn">
+                        <button type="submit" class="more-path" (click)="addMorePath()">Add more
+                            paths</button>
+                    </div>
+                    <div *ngIf="saveBtn" class="moreBtn">
+                        <button type="submit" class="more-path" (click)="save()">SAVE</button>
+                    </div>
                 </div>
-                <div>
+                <div class="submitt">
                     <form #myForm="ngForm" (ngSubmit)="Submit()">
-                        <!-- form controls here -->
-                        <button type="submit" class="submit">Submit</button>
+                        <button type="submit" class="sBtn">Submit</button>
                     </form>
                 </div>
             </form>
+            <!-- </div>
+                    </div> -->
         </ng-container>
     </div>
-
 </body>
 
 </html>

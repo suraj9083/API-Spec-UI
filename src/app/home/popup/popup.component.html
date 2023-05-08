@@ -24,3 +24,51 @@
         <button mat-button [mat-dialog-close]="true">Close</button>
     </div>
 </ng-container>
+
+<ng-container *ngIf="filename">
+    <h1 mat-dialog-title><img src="../../../assets/succ_icon.jpg" height="50px" width="50px"
+            style="display: block; margin: auto;"></h1>
+    <h2 style="color: black">File Successfully readed and this is a filename given from server</h2>
+    <label style="color: black;">Filename : </label>
+    <input type="text" class="filename" [value]="filenameFromParent" readonly>
+    <div class="validateFile">
+        <h2 style="color: black; margin-top: 20px; margin-top: 7px;position: relative;top: 26px;">Paste your file name
+            for validation</h2>
+        <label style="color: black;">Filename : </label>
+        <input type="text" class="filename" placeholder="File name - f5edwe42uyc" [(ngModel)]="fileInputValue" #takename
+            (paste)="onInput($event)"><!--[(ngModel)]="fileInputValue"-->
+        <button class="validateBtn" (click)="validateFilename(takename.value)"
+            [mat-dialog-close]="fileInputValue" cdkFocusInitial>Validate</button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="download">
+    <h1 mat-dialog-title><img src="../../../assets/download.png" height="50px" width="50px"
+            style="display: block; margin: auto;"></h1>
+    <div mat-dialog-actions class="downl">
+        <h2>Get ready to add some awesomeness to your computer with this file download.</h2>
+        <div class="btns">
+            <button mat-button [mat-dialog-close]="true">Close</button>
+            <button mat-button (click)="downloadFile()">Download Spec</button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="delete">
+    <div style="width: 460;">
+        <h1 mat-dialog-title>Delete Confirmation!!</h1>
+        <div mat-dialog-content style="background-color: rgb(235, 164, 164);
+        height: 45px;
+        position: relative;">
+            <span style="font-size: 15px;
+            position: absolute;
+            width: auto;
+            top: 10px;"> Are you sure you want to delete route {{ route }}</span>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">Close</button>
+            <button style="background-color: rgb(216, 88, 88); color: white;" (click)="deleteItem()" mat-button
+                cdkFocusInitial>Delete</button>
+        </div>
+    </div>
+</ng-container>
