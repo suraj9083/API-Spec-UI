@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ServiceService } from 'src/app/service/service.service';
 import { PopupComponent } from '../popup/popup.component';
-import { FieldType, FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import * as yaml from 'js-yaml'
@@ -38,9 +37,6 @@ export class EditOnApispecComponent implements OnInit {
   addPath: boolean = false;
   isPost: boolean = true;
   isGet: boolean = false;
-  showInput = false;
-  newValue = '';
-  formData1: any;
   moreBtn: boolean = true;
   saveBtn: boolean = false;
 
@@ -150,6 +146,9 @@ export class EditOnApispecComponent implements OnInit {
             this.showFileName = true;
             this.fileValid = false;
             this.selectfile = true;
+          }
+          else if (result === undefined) {
+            console.log("Inside else if undefind")
           }
           else {
             this.showFileName = false;
@@ -279,9 +278,14 @@ export class EditOnApispecComponent implements OnInit {
         }
       }
     }
-    this.formData['reqInput'] = this.inputs;
-    this.formData['resInput'] = this.inputs1
-    this.dataFromUser.push(this.formData)
+    if (this.formData.keyPath == '' || this.formData.method == '') {
+      // skipp
+    }
+    else {
+      this.formData['reqInput'] = this.inputs;
+      this.formData['resInput'] = this.inputs1
+      this.dataFromUser.push(this.formData)
+    }
     console.log(this.dataFromUser);
     let body = [];
     let finalBody;
@@ -300,12 +304,12 @@ export class EditOnApispecComponent implements OnInit {
       for (let i = 0; i < this.dataFromUser.length; i++) {
         if (this.dataFromUser[i].method == 'post') {
           for (let k = 0; k < this.dataFromUser[i].reqInput.length; k++) {
-            reqSchemasProperties = [];
             reqSchemasProperties.push({
               "name": this.dataFromUser[i].reqInput[k].name,
               "type": this.dataFromUser[i].reqInput[k].type
             });
-            resSchemasProperties = [];
+          }
+          for (let k = 0; k < this.dataFromUser[i].resInput.length; k++) {
             console.log("this.dataFromUser[i].resInput[k].name1", this.dataFromUser[i].resInput[k].name1)
             resSchemasProperties.push({
               "name1": this.dataFromUser[i].resInput[k].name1,
@@ -319,9 +323,7 @@ export class EditOnApispecComponent implements OnInit {
             "method": this.dataFromUser[i].method,
             "tag": this.dataFromUser[i].tag,
             "description": this.dataFromUser[i].discription,
-            "reqBody": {
-              "description": this.dataFromUser[i].reqDis
-            },
+            "reqDes": this.dataFromUser[i].reqDis,
             "response": {
               "two00": "200",
               "four00": "400",
@@ -360,9 +362,7 @@ export class EditOnApispecComponent implements OnInit {
             "method": this.dataFromUser[i].method,
             "tag": this.dataFromUser[i].tag,
             "description": this.dataFromUser[i].discription,
-            "reqBody": {
-              "description": this.dataFromUser[i].reqDis
-            },
+            "reqDes": this.dataFromUser[i].reqDis,
             "response": {
               "two00": "200",
               "four00": "400",
@@ -389,6 +389,8 @@ export class EditOnApispecComponent implements OnInit {
           body.splice(index, 1);
           console.log("After >>>>>>>", body);
           finalBody = body;
+          reqSchemasProperties = [];
+          resSchemasProperties = [];
         }
         else {
           finalBody = body;

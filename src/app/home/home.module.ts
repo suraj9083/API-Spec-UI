@@ -17,13 +17,16 @@ import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/m
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { HeaderComponent } from './header/header.component';
+import { UploadRoutefilesComponent } from './upload-routefiles/upload-routefiles.component';
+import { NgxLoadingModule } from "ngx-loading";
 
 @NgModule({
   declarations: [
     SpecreaderPageComponent,
     PopupComponent,
     EditOnApispecComponent,
-    HeaderComponent
+    HeaderComponent,
+    UploadRoutefilesComponent
   ],
   imports: [
     CommonModule,
@@ -39,8 +42,8 @@ import { HeaderComponent } from './header/header.component';
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
-    FormsModule
-    
+    FormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   exports: [
     MatButtonModule,

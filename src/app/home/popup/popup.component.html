@@ -1,3 +1,11 @@
+<ngx-loading     (show)=true [config]="{
+      fullScreenBackdrop: true,
+      primaryColour: '#ffffff',
+      secondaryColour: '#cccccc',
+      tertiaryColour: '#dddddd',
+      backdropBorderRadius: '3px'
+    }"></ngx-loading>
+
 <ng-container *ngIf="initModal">
     <h1 mat-dialog-title><img src="../../../assets/warning.png" height="50px" width="50px"
             style="display: block; margin: auto;"></h1>
@@ -31,16 +39,28 @@
     <h2 style="color: black">File Successfully readed and this is a filename given from server</h2>
     <label style="color: black;">Filename : </label>
     <input type="text" class="filename" [value]="filenameFromParent" readonly>
-    <div class="validateFile">
+    <div *ngIf="filename1">
         <h2 style="color: black; margin-top: 20px; margin-top: 7px;position: relative;top: 26px;">Paste your file name
             for validation</h2>
         <label style="color: black;">Filename : </label>
         <input type="text" class="filename" placeholder="File name - f5edwe42uyc" [(ngModel)]="fileInputValue" #takename
             (paste)="onInput($event)"><!--[(ngModel)]="fileInputValue"-->
-        <button class="validateBtn" (click)="validateFilename(takename.value)"
-            [mat-dialog-close]="fileInputValue" cdkFocusInitial>Validate</button>
+        <button class="validateBtn" (click)="validateFilename(takename.value)" cdkFocusInitial>Validate</button>
     </div>
+
+    <div *ngIf="msg">
+        <div class="msg">
+            <span>If you want to define api use this <button (click)="withForm()" cdkFocusInitial>Click
+                    here</button></span>
+        </div>
+        <div class="msg1">
+            <span>Or if you have api listed in .xlsx or .csv <input type="file" id="file-input" name="file-input"
+                    (change)="onFileSelected($event)"></span>
+        </div>
+    </div>
+
 </ng-container>
+
 
 <ng-container *ngIf="download">
     <h1 mat-dialog-title><img src="../../../assets/download.png" height="50px" width="50px"
@@ -48,7 +68,7 @@
     <div mat-dialog-actions class="downl">
         <h2>Get ready to add some awesomeness to your computer with this file download.</h2>
         <div class="btns">
-            <button mat-button [mat-dialog-close]="true">Close</button>
+            <button mat-button [mat-dialog-close]="true" (click)="reload()">Close</button>
             <button mat-button (click)="downloadFile()">Download Spec</button>
         </div>
     </div>

@@ -53,6 +53,7 @@ export class SpecreaderPageComponent implements OnInit {
           "paths": this.paths,
           "routes": this.allRoutes
         })
+        console.log(resp)
       }
       else {
         this.dialog.open(PopupComponent, {

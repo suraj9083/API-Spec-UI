@@ -14,6 +14,7 @@ export class PopupComponent implements OnInit {
   paths: boolean = false;
   forRoute: boolean = false;
   filename: boolean = false;
+  filename1: boolean = true;
   filenameFromParent: any;
   fileType: any;
   fileInputValue: string = '';
@@ -23,6 +24,9 @@ export class PopupComponent implements OnInit {
   downFileResp: any;
   delete: boolean = false;
   route: string = '';
+  msg: boolean = false;
+  selectedFile!: File | null;
+  public loading = false;
 
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
@@ -56,20 +60,13 @@ export class PopupComponent implements OnInit {
       this.downFileResp = this.data.responseFromAPI;
     }
     else if (this.data.true == 'delete') {
-      console.log("fullRoute", this.data)
+      console.log("delete", this.data)
       this.route = this.data.item;
       this.initModal = false;
       this.delete = true;
     }
 
   }
-
-  // takeNanem(name: any) {
-  //   if (name.length > 32) {
-  //     this.name = name.substr(0, 32);
-  //     console.log(this.name);
-  //   }
-  // }
 
   validateFilename(name: any) {
     this.name = name.slice(32, name.lenght);
@@ -91,13 +88,16 @@ export class PopupComponent implements OnInit {
     this.service.validateFilename(body).then((resp: any) => {
       console.log("Resp>>>", resp);
       if (resp.msg == 'file valid!!') {
-        this.dialogRef.close();
+        this.filename1 = false;
+        this.msg = true;
       }
       else if (resp.msg == 'File Invalid') {
-        alert(resp.msg)
+        alert(resp.msg);
+        window.location.reload();
       }
       else {
-        alert(resp.msg)
+        alert(resp.msg);
+        window.location.reload();
       }
     })
   }
@@ -108,16 +108,19 @@ export class PopupComponent implements OnInit {
   }
 
   downloadFile() {
-    if (this.downFileType == "json") {
+    this.loading = false;
+    if (this.downFileType == "json" || this.downFileType == "application/json") {
       const jsonContent = JSON.stringify(this.data.responseFromAPI);
       const blob = new Blob([jsonContent], { type: 'application/json' });
       saveAs(blob, 'api-spec.json');
+      window.location.reload();
       this.dialogRef.close();
     }
     else {
       const yamlContent = yaml.dump(this.data.responseFromAPI);
       const blob = new Blob([yamlContent], { type: 'application/x-yaml' });
       saveAs(blob, 'api-spec.yaml');
+      window.location.reload();
       this.dialogRef.close();
     }
   }
@@ -125,5 +128,43 @@ export class PopupComponent implements OnInit {
   deleteItem() {
     this.dialogRef.close()
   }
+
+  withForm() {
+    this.dialogRef.close();
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = null;
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile === undefined) {
+      console.log("selectedFile ==> ", this.selectedFile)
+
+    }
+    else {
+      console.log("selectedFile ==> ", this.selectedFile)
+      console.log("filename", this.filenameFromParent, this.fileType)
+      let body = {
+        filename: this.filenameFromParent,
+        fileType: this.fileType
+      }
+      this.service.uploadXlsx(this.selectedFile, body).then((resp) => {
+        if (resp.openapi != '') {
+          this.data.responseFromAPI = resp;
+          this.filename = false;
+          this.loading = true;
+          this.download = true;
+        }
+        else {
+          alert("File invalid please check it!!")
+        }
+      })
+
+    }
+  }
+
+  reload(){
+    window.location.reload();
+  }
+
 
 }

@@ -21,7 +21,7 @@ export class ServiceService {
         }, reject)
     })
   }
-  
+
   addData(body: any): Promise<any> {
     console.log("addData api called");
     return new Promise((resolve, reject) => {
@@ -39,6 +39,19 @@ export class ServiceService {
     formData.append('file', file);
     return new Promise((resolve, reject) => {
       this.http.post(this.url + "/api/tempdyno/v1/giveFileName", formData).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("resend otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
+  uploadXlsx(file: any, body: any): Promise<any> {
+    console.log("specReader api called")
+    const formData = new FormData();
+    formData.append('file', file);
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + `/api/tempdyno/v1/uploadXlsx?filename=${body.filename}&fileType=${body.fileType}`, formData).pipe(map(Response => Response))
         .subscribe((response: any) => {
           // console.log("resend otp API response:", response)
           resolve(response);
