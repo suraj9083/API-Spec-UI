@@ -239,14 +239,17 @@ export class EditOnApispecComponent implements OnInit {
   }
 
   addMorePath() {
-    this.formData['reqInput'] = this.inputs;
-    this.formData['resInput'] = this.inputs1
-    this.dataFromUser.push(this.formData)
     if (this.formData.method == 'get') {
+      this.formData['reqInput'] = this.inputs;
+      this.formData['resInput'] = this.inputs1
+      this.dataFromUser.push(this.formData)
       this.addgetPathCount = this.addgetPathCount + 1;
       this.addPath = true;
     }
     else if (this.formData.method == 'post') {
+      this.formData['reqInput'] = this.inputs;
+      this.formData['resInput'] = this.inputs1
+      this.dataFromUser.push(this.formData)
       this.addpostPathCount = this.addpostPathCount + 1;
       this.addPath = true;
     }

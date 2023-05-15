@@ -1,0 +1,45 @@
+<body>
+    <section>
+        <div class="container">
+            <div class="user signinBx">
+                <!-- https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg -->
+                <div class="imgBx"><img src="../../../assets/login.jpg" alt="" /></div>
+                <div class="formBx">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogSubmit()">
+                        <h2>Sign In</h2>
+                        <input type="text" name="" placeholder="email" formControlName="email" />
+                        <!-- <div *ngIf="f['email'].errors['required']">Email is required</div> -->
+                        <input type="password" name="" placeholder="Password" formControlName="password" />
+                        <input type="submit" name="" />
+
+                        <p class="signup">
+                            Don't have an account ?
+                            <!-- <a href="#" (click)="toggleForm()">Sign Up.</a> -->
+                            <span class="regBtn" (click)="toggleForm()">Sign Up.</span>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="user signupBx">
+                <div class="formBx">
+                    <form [formGroup]="regiForm" (ngSubmit)="onRegSubmit()">
+                        <h2>Create an account</h2>
+                        <input type="text" name="" placeholder="Username" formControlName="username" />
+                        <input type="text" name="" placeholder="Phone" formControlName="phone" />
+                        <input type="email" name="" placeholder="Email Address" formControlName="email" />
+                        <input type="password" name="" placeholder="Create Password" formControlName="password" />
+                        <input type="password" name="" placeholder="Confirm Password" formControlName="confpassword" />
+                        <input type="submit" name="" value="Sign Up" />
+                        <p class="signup">
+                            Already have an account ?
+                            <!-- <a href="#" (click)="toggleForm();">Sign in.</a> -->
+                            <span class="regBtn" (click)="toggleForm()">Sign In.</span>
+                        </p>
+                    </form>
+                </div>
+                <!-- https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg -->
+                <div class="imgBx"><img src="../../../assets/first.jpg" alt="" /></div>
+            </div>
+        </div>
+    </section>
+</body>

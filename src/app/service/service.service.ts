@@ -70,4 +70,48 @@ export class ServiceService {
     })
   }
 
+  signup(body: any): Promise<any> {
+    console.log("signup api called")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + "/user/signup", body).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("resend otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
+  signin(body: any): Promise<any> {
+    console.log("signup api called")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + "/user/signin", body).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("resend otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
+  qr(): Promise<any> {
+    console.log("qr api called")
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + "/mfa/qr").pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("resend otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
+  veriTOTP(body: any): Promise<any> {
+    console.log("verify api called")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + "/mfa/verify", body).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("veriOTP otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
 }

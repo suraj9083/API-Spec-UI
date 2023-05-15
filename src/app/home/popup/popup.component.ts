@@ -35,8 +35,8 @@ export class PopupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("data popup", this.data)
     if (this.data.true == 'paths') {
+      console.log("data popup", this.data)
       this.initModal = false;
       this.paths = true;
     }
@@ -65,7 +65,6 @@ export class PopupComponent implements OnInit {
       this.initModal = false;
       this.delete = true;
     }
-
   }
 
   validateFilename(name: any) {
@@ -108,7 +107,6 @@ export class PopupComponent implements OnInit {
   }
 
   downloadFile() {
-    this.loading = false;
     if (this.downFileType == "json" || this.downFileType == "application/json") {
       const jsonContent = JSON.stringify(this.data.responseFromAPI);
       const blob = new Blob([jsonContent], { type: 'application/json' });
@@ -134,6 +132,7 @@ export class PopupComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    this.loading = true;
     this.selectedFile = null;
     this.selectedFile = event.target.files[0];
     if (this.selectedFile === undefined) {
@@ -149,10 +148,19 @@ export class PopupComponent implements OnInit {
       }
       this.service.uploadXlsx(this.selectedFile, body).then((resp) => {
         if (resp.openapi != '') {
-          this.data.responseFromAPI = resp;
-          this.filename = false;
-          this.loading = true;
-          this.download = true;
+          console.log(resp, "<<<<")
+          if (resp.status == "failed") {
+            this.data = resp.msg;
+            this.loading = false;
+            this.filename = false;
+            this.initModal = true;
+          }
+          else {
+            this.data.responseFromAPI = resp;
+            this.filename = false;
+            this.loading = false;
+            this.download = true;
+          }
         }
         else {
           alert("File invalid please check it!!")
@@ -162,7 +170,7 @@ export class PopupComponent implements OnInit {
     }
   }
 
-  reload(){
+  reload() {
     window.location.reload();
   }
 
