@@ -1,4 +1,4 @@
-<ngx-loading     (show)=true [config]="{
+<ngx-loading [show]="loading" [config]="{
       fullScreenBackdrop: true,
       primaryColour: '#ffffff',
       secondaryColour: '#cccccc',
@@ -11,7 +11,7 @@
             style="display: block; margin: auto;"></h1>
     <div mat-dialog-content style="color: red;">{{data}}</div>
     <div mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="true">Close</button>
+        <button mat-button [mat-dialog-close]="true" (click)="reload()">Close</button>
     </div>
 </ng-container>
 
@@ -89,6 +89,41 @@
             <button mat-button [mat-dialog-close]="true">Close</button>
             <button style="background-color: rgb(216, 88, 88); color: white;" (click)="deleteItem()" mat-button
                 cdkFocusInitial>Delete</button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="collection">
+    <h1 mat-dialog-title><img src="../../../assets/download.png" height="50px" width="50px"
+            style="display: block; margin: auto;"></h1>
+    <div mat-dialog-actions class="downl">
+        <h2>Get ready to add some awesomeness to your computer with this file download. <br> <span style="    color: #beae96;
+            display: flex;
+            justify-content: center;"> You will able to
+                download only once. </span></h2>
+        <div class="btns">
+            <button mat-button class="download-button" (click)="donwloadCollection()"> Download Collection</button>
+        </div>
+        <hr>
+        <div class="import">
+            <h2>Directly add collection to postman</h2>
+            <button mat-button [mat-dialog-close]="true">Close</button>
+            <button mat-button class="download-button" (click)="importCollection()">Import to postman</button>
+        </div>
+
+    </div>
+</ng-container>
+
+<ng-container *ngIf="ps_confirm">
+    <h1 mat-dialog-title><img src="../../../assets/confm.jpg" height="50px" width="50px"
+            style="display: block; margin: auto;"></h1>
+    <div mat-dialog-actions class="downl">
+        <h2>Add your postman api key.</h2>
+        <label style="color: black;">Api-Key : </label>
+        <input type="text" class="filename" #apikey>
+        <div class="btns">
+            <button mat-button (click)="backToCollection()">Close</button>
+            <button mat-button class="download-button" (click)="takeApi(apikey.value)">Import</button>
         </div>
     </div>
 </ng-container>

@@ -33,6 +33,7 @@
         border-radius: 5px;
         width: 80px;
         height: 20px;
+        cursor: pointer;
     }
 }
 
@@ -50,3 +51,29 @@
         height: 20px;
     }
 }
+
+.import{
+    margin-top: 5px;
+}
+
+.download-button {
+    margin-top: 10px;
+    background-color: #F85D50;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #E64439;
+  }
+  
+  .download-button i {
+    margin-right: 5px;
+  }
+
+  ::ng-deep .mat-dialog-container {
+    height: auto;
+    overflow-y: scroll;
+  }

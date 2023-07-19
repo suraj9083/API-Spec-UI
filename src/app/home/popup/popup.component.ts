@@ -10,6 +10,8 @@ import * as yaml from 'js-yaml'
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent implements OnInit {
+
+  public loading = false;
   initModal: boolean = true;
   paths: boolean = false;
   forRoute: boolean = false;
@@ -26,7 +28,8 @@ export class PopupComponent implements OnInit {
   route: string = '';
   msg: boolean = false;
   selectedFile!: File | null;
-  public loading = false;
+  collection: boolean = false;
+  ps_confirm: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
@@ -35,8 +38,9 @@ export class PopupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log("data popup", this.data)
+    console.log(this.data)
     if (this.data.true == 'paths') {
+      console.log("data popup", this.data)
       this.initModal = false;
       this.paths = true;
     }
@@ -65,7 +69,11 @@ export class PopupComponent implements OnInit {
       this.initModal = false;
       this.delete = true;
     }
-
+    else if (this.data.true == 'collection') {
+      console.log("collection", this.data)
+      this.initModal = false;
+      this.collection = true;
+    }
   }
 
   validateFilename(name: any) {
@@ -108,7 +116,6 @@ export class PopupComponent implements OnInit {
   }
 
   downloadFile() {
-    this.loading = false;
     if (this.downFileType == "json" || this.downFileType == "application/json") {
       const jsonContent = JSON.stringify(this.data.responseFromAPI);
       const blob = new Blob([jsonContent], { type: 'application/json' });
@@ -134,6 +141,7 @@ export class PopupComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    this.loading = true;
     this.selectedFile = null;
     this.selectedFile = event.target.files[0];
     if (this.selectedFile === undefined) {
@@ -149,10 +157,19 @@ export class PopupComponent implements OnInit {
       }
       this.service.uploadXlsx(this.selectedFile, body).then((resp) => {
         if (resp.openapi != '') {
-          this.data.responseFromAPI = resp;
-          this.filename = false;
-          this.loading = true;
-          this.download = true;
+          console.log(resp, "<<<<")
+          if (resp.status == "failed") {
+            this.data = resp.msg;
+            this.loading = false;
+            this.filename = false;
+            this.initModal = true;
+          }
+          else {
+            this.data.responseFromAPI = resp;
+            this.filename = false;
+            this.loading = false;
+            this.download = true;
+          }
         }
         else {
           alert("File invalid please check it!!")
@@ -162,9 +179,47 @@ export class PopupComponent implements OnInit {
     }
   }
 
-  reload(){
+  reload() {
     window.location.reload();
   }
 
+  donwloadCollection() {
+    this.service.makePostman('make').then((Resp) => {
+      console.log("downloadCollection result", Resp)
+      let jsonContent = JSON.stringify(Resp.data);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      saveAs(blob, 'postman_collection.json');
+      const returnMessage = "Dialog closed successfully.";
+      this.dialogRef.close(returnMessage);
+    })
+  }
+
+  importCollection() {
+    this.ps_confirm = true;
+    this.collection = false;
+  }
+
+  backToCollection() {
+    this.collection = true;
+    this.ps_confirm = false;
+  }
+
+  takeApi(key: any) {
+    console.log("User Entered Api Key ==.> ", key);
+    let body = {
+      apikey: key
+    }
+    this.service.import(body).then(resp => {
+      if (resp.error == false) {
+        alert(resp.msg);
+        const returnMessage = "Dialog closed successfully.";
+        this.dialogRef.close(returnMessage);
+      }
+      else {
+        alert(resp.msg);
+        this.dialogRef.close();
+      }
+    })
+  }
 
 }
