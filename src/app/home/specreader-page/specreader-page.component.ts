@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/service/service.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 
 @Component({
@@ -20,7 +20,8 @@ export class SpecreaderPageComponent implements OnInit {
   routesCount: any;
   limit = 6;
   numItemsToShow: number = 6;
-  btnFlag: boolean = true
+  btnFlag: boolean = true;
+  postman: boolean = true;
 
   constructor(private service: ServiceService, private dialog: MatDialog) { }
 
@@ -105,6 +106,21 @@ export class SpecreaderPageComponent implements OnInit {
         fileName.value = file.name;
       } else {
         fileName.value = '';
+      }
+    });
+  }
+
+  downloadCollection() {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      'true': 'collection'
+    };
+    let dialogRef = this.dialog.open(PopupComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(resp => {
+      console.log("collection resp", resp)
+      if (resp == 'Dialog closed successfully.') {
+        this.postman = false;
       }
     });
   }

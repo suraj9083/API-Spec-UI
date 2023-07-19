@@ -114,4 +114,25 @@ export class ServiceService {
     })
   }
 
+  makePostman(body: any): Promise<any> {
+    console.log("makePostman api called")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + "/api/tempdyno/v1/makePsCollection", body).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("veriOTP otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
+  import(body: any): Promise<any> {
+    console.log("importCollection api called")
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url + "/api/tempdyno/v1/importCollection", body).pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("veriOTP otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
 }

@@ -20,10 +20,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 // } from '@angular/material';
 
 import { FormsModule } from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

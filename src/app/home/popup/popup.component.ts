@@ -10,6 +10,8 @@ import * as yaml from 'js-yaml'
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent implements OnInit {
+
+  public loading = false;
   initModal: boolean = true;
   paths: boolean = false;
   forRoute: boolean = false;
@@ -26,7 +28,8 @@ export class PopupComponent implements OnInit {
   route: string = '';
   msg: boolean = false;
   selectedFile!: File | null;
-  public loading = false;
+  collection: boolean = false;
+  ps_confirm: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
@@ -35,6 +38,7 @@ export class PopupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data)
     if (this.data.true == 'paths') {
       console.log("data popup", this.data)
       this.initModal = false;
@@ -64,6 +68,11 @@ export class PopupComponent implements OnInit {
       this.route = this.data.item;
       this.initModal = false;
       this.delete = true;
+    }
+    else if (this.data.true == 'collection') {
+      console.log("collection", this.data)
+      this.initModal = false;
+      this.collection = true;
     }
   }
 
@@ -174,5 +183,43 @@ export class PopupComponent implements OnInit {
     window.location.reload();
   }
 
+  donwloadCollection() {
+    this.service.makePostman('make').then((Resp) => {
+      console.log("downloadCollection result", Resp)
+      let jsonContent = JSON.stringify(Resp.data);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      saveAs(blob, 'postman_collection.json');
+      const returnMessage = "Dialog closed successfully.";
+      this.dialogRef.close(returnMessage);
+    })
+  }
+
+  importCollection() {
+    this.ps_confirm = true;
+    this.collection = false;
+  }
+
+  backToCollection() {
+    this.collection = true;
+    this.ps_confirm = false;
+  }
+
+  takeApi(key: any) {
+    console.log("User Entered Api Key ==.> ", key);
+    let body = {
+      apikey: key
+    }
+    this.service.import(body).then(resp => {
+      if (resp.error == false) {
+        alert(resp.msg);
+        const returnMessage = "Dialog closed successfully.";
+        this.dialogRef.close(returnMessage);
+      }
+      else {
+        alert(resp.msg);
+        this.dialogRef.close();
+      }
+    })
+  }
 
 }

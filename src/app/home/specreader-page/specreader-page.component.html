@@ -69,6 +69,12 @@
                     </div>
                 </ng-container>
             </div>
+            <div class="postman" *ngIf="postman">
+                <span>Download Your Postman Collection</span>
+                <button class="download-button" (click)="downloadCollection()">
+                    <i class="fas fa-cloud-download-alt"></i> Download
+                </button>
+            </div>
         </ng-container>
     </div>
 </body>

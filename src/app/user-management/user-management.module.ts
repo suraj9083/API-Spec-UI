@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MfaComponent } from './mfa/mfa.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    MfaComponent
+    MfaComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
