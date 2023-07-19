@@ -11,6 +11,9 @@
 <body>
     <app-header class="head"></app-header>
     <div class="container">
+        <div class="specification">
+            <span style="color: white; font-size: 15px;">What to do now? <span style="cursor: pointer; color: rgb(86, 86, 240);" (click)="openSpecification()">Click me</span> to know process.</span>
+        </div>
         <div class="selectFile" *ngIf="selectfile">
             <form>
                 <div class="selecDiv">

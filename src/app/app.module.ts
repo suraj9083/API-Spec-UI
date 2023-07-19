@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     // FormlyModule.forRoot(),
     FormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

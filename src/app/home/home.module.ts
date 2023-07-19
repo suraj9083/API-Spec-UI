@@ -47,7 +47,9 @@ import { NgxLoadingModule } from "ngx-loading";
   ],
   exports: [
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    HeaderComponent,
+    PopupComponent
   ]
 })
 export class HomeModule { }

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MfaComponent } from './mfa/mfa.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LoginComponent } from './login/login.component';
     UserManagementRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HomeModule
   ]
 })
 export class UserManagementModule { }

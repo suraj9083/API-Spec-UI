@@ -135,4 +135,15 @@ export class ServiceService {
         }, reject)
     })
   }
+
+  specification(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url + "/postman/editspecification").pipe(map(Response => Response))
+        .subscribe((response: any) => {
+          // console.log("veriOTP otp API response:", response)
+          resolve(response);
+        }, reject)
+    })
+  }
+
 }

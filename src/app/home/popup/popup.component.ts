@@ -30,6 +30,7 @@ export class PopupComponent implements OnInit {
   selectedFile!: File | null;
   collection: boolean = false;
   ps_confirm: boolean = false;
+  editspecifi: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
@@ -73,6 +74,11 @@ export class PopupComponent implements OnInit {
       console.log("collection", this.data)
       this.initModal = false;
       this.collection = true;
+    }
+    else if (this.data.true == 'edit') {
+      console.log("collection", this.data)
+      this.initModal = false;
+      this.editspecifi = true;
     }
   }
 
@@ -181,6 +187,15 @@ export class PopupComponent implements OnInit {
 
   reload() {
     window.location.reload();
+  }
+
+  downloadSpecification() {
+    this.service.specification().then((resp) => {
+      let jsonContent = JSON.stringify(resp.data);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+      saveAs(blob, 'sample.json');
+      this.dialogRef.close();
+    })
   }
 
   donwloadCollection() {

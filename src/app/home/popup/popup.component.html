@@ -127,3 +127,17 @@
         </div>
     </div>
 </ng-container>
+
+<ng-container *ngIf="editspecifi">
+    <h1 mat-dialog-title>API Specification</h1>
+    <div mat-dialog-content>
+        <p>Select your current API spec and upload it to our platform.</p>
+        <p>Add your additional route endpoints, request and response formats, or download a sample API spec template by
+            clicking the <span style="cursor: pointer; color: orange;" (click)="downloadSpecification()">"Here"</span></p>
+        <p>You can then upload the downloaded template and continue the process to create your API specification. Our
+            platform provides a seamless experience for documenting and designing robust APIs.</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Close</button>
+    </div>
+</ng-container>

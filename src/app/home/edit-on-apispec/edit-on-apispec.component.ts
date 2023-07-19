@@ -445,4 +445,17 @@ export class EditOnApispecComponent implements OnInit {
     this.inputs1 = [];
   }
 
+  openSpecification() {
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "460px";
+    dialogConfig.data = {
+      "true": 'edit'
+    }
+    let dialogRef = this.dialog.open(PopupComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result: string) => {
+      console.log("Edit specification model closed!!!")
+    })
+  }
+
 }
