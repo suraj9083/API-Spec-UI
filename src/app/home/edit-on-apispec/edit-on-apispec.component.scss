@@ -9,7 +9,7 @@ body {
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
-
+    overflow-y: scroll;
 }
 
 @keyframes gradient {
@@ -86,7 +86,7 @@ body {
     box-sizing: border-box;
 }
 
-.submitBtn {
+.submit {
     margin-left: 154px;
     margin-top: 15px;
     background: transparent;
@@ -96,8 +96,22 @@ body {
     border: 1px solid #A163F7;
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, color 0.3s;
 }
 
+.submit:hover {
+    background-color: #800080;
+    color: #fff;
+    transform: scale(1.03);
+}
+
+.submit:disabled {
+    background-color: #ccc;
+    border-color: #999;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
 // .submitBtn1 {
 //     margin-left: 154px;
 //     margin-top: 15px;

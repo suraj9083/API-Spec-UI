@@ -40,6 +40,7 @@ export class PopupComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
+    this.loading = false;
     if (this.data.true == 'paths') {
       console.log("data popup", this.data)
       this.initModal = false;
@@ -83,6 +84,7 @@ export class PopupComponent implements OnInit {
   }
 
   validateFilename(name: any) {
+    this.loading = true;
     this.name = name.slice(32, name.lenght);
     let body;
     if (this.fileType == "application/json" || this.fileType == "application/json") {
@@ -102,14 +104,17 @@ export class PopupComponent implements OnInit {
     this.service.validateFilename(body).then((resp: any) => {
       console.log("Resp>>>", resp);
       if (resp.msg == 'file valid!!') {
+        this.loading = false;
         this.filename1 = false;
         this.msg = true;
       }
       else if (resp.msg == 'File Invalid') {
+        this.loading = false;
         alert(resp.msg);
         window.location.reload();
       }
       else {
+        this.loading = false;
         alert(resp.msg);
         window.location.reload();
       }
@@ -170,6 +175,12 @@ export class PopupComponent implements OnInit {
             this.filename = false;
             this.initModal = true;
           }
+          else if(resp.error){
+            this.data = resp.error;
+            this.loading = false;
+            this.filename = false;
+            this.initModal = true;
+          }
           else {
             this.data.responseFromAPI = resp;
             this.filename = false;
@@ -219,18 +230,21 @@ export class PopupComponent implements OnInit {
     this.ps_confirm = false;
   }
 
-  takeApi(key: any) {
+  takeApiForImportCollection(key: any) {
+    this.loading = true;
     console.log("User Entered Api Key ==.> ", key);
     let body = {
       apikey: key
     }
     this.service.import(body).then(resp => {
       if (resp.error == false) {
+        this.loading = false;
         alert(resp.msg);
         const returnMessage = "Dialog closed successfully.";
         this.dialogRef.close(returnMessage);
       }
       else {
+        this.loading = false;
         alert(resp.msg);
         this.dialogRef.close();
       }

@@ -9,6 +9,7 @@ import { PopupComponent } from '../popup/popup.component';
   styleUrls: ['./specreader-page.component.scss']
 })
 export class SpecreaderPageComponent implements OnInit {
+  public loading = false;
   selectedFile!: File | null;
   routes: boolean = false;
   fullRoutes: boolean = false;
@@ -22,6 +23,7 @@ export class SpecreaderPageComponent implements OnInit {
   numItemsToShow: number = 6;
   btnFlag: boolean = true;
   postman: boolean = true;
+  disableBtn: boolean = false;
 
   constructor(private service: ServiceService, private dialog: MatDialog) { }
 
@@ -40,10 +42,13 @@ export class SpecreaderPageComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     this.service.specReader(this.selectedFile).then((resp: any) => {
       this.fullRoutes = false;
+      this.disableBtn = true;
       this.btnFlag = true;
       if (resp.error == "false") {
+        this.loading = false;        
         this.routes = true;
         this.paths = resp.paths;
         this.pathsCount = resp.paths.length;
@@ -57,6 +62,7 @@ export class SpecreaderPageComponent implements OnInit {
         console.log(resp)
       }
       else {
+        this.loading = false;
         this.dialog.open(PopupComponent, {
           data: resp.error
         });

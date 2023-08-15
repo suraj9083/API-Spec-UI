@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-on-apispec.component.scss']
 })
 export class EditOnApispecComponent implements OnInit {
+  public loading = false;
   // public myFormForPath!: FormGroup<PathForm>;
   selectedFile!: File | null;
   selectfile: boolean = true;
@@ -114,9 +115,10 @@ export class EditOnApispecComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true
     this.service.getFileName(this.selectedFile).then((resp: any) => {
       if (resp.error == "false") {
-        console.log(resp)
+        this.loading = false;
         this.selectfile = false;
         this.filename = resp.filename;
         this.showFileName = true;
@@ -157,6 +159,7 @@ export class EditOnApispecComponent implements OnInit {
         });
       }
       else {
+        this.loading = false;
         this.dialog.open(PopupComponent, {
           data: resp.error
         });
@@ -272,6 +275,7 @@ export class EditOnApispecComponent implements OnInit {
   }
 
   Submit() {
+    this.loading = true;
     console.log("Submit >>>", this.dataFromUser);
     if (this.dataFromUser.length > 0) {
       for (let z = 0; z < this.dataFromUser.length; z++) {
@@ -314,10 +318,12 @@ export class EditOnApispecComponent implements OnInit {
           }
           for (let k = 0; k < this.dataFromUser[i].resInput.length; k++) {
             console.log("this.dataFromUser[i].resInput[k].name1", this.dataFromUser[i].resInput[k].name1)
-            resSchemasProperties.push({
-              "name1": this.dataFromUser[i].resInput[k].name1,
-              "type1": this.dataFromUser[i].resInput[k].type1
-            })
+            if(this.dataFromUser[i].resInput[k] && this.dataFromUser[i].resInput[k].name1){
+              resSchemasProperties.push({
+                "name1": this.dataFromUser[i].resInput[k].name1,
+                "type1": this.dataFromUser[i].resInput[k].type1
+              });
+            }
           }
           console.log("resSchemasProperties", resSchemasProperties)
           console.log("reqSchemasProperties", reqSchemasProperties)
@@ -403,9 +409,9 @@ export class EditOnApispecComponent implements OnInit {
     }
 
     this.service.addData(finalBody).then((resp) => {
-      console.log("AddData resp ..", resp)
       var responseFromAPI = resp;
       if (this.fileType == "application/json" || this.fileType == "application/json") {
+        this.loading = false;
         const dialogConfig: MatDialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.data = {
@@ -423,6 +429,7 @@ export class EditOnApispecComponent implements OnInit {
         })
       }
       else {
+        this.loading = false;
         const dialogConfig: MatDialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.data = {

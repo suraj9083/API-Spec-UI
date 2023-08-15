@@ -6,7 +6,8 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class ServiceService {
-  url = 'http://localhost:4000'
+  // url = 'http://localhost:4000'
+  url = 'https://api-spec.onrender.com';
   constructor(private http: HttpClient) { }
 
   specReader(file: any): Promise<any> {

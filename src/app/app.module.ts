@@ -22,6 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeModule } from './home/home.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card'; // Import MatCardModule
 
 @NgModule({
   declarations: [
@@ -36,12 +38,13 @@ import { HomeModule } from './home/home.module';
     MatDialogModule,
     MatButtonModule,
     ReactiveFormsModule,
-
+    DragDropModule,
     // FormlyBootstrapModule,
     // FormlyModule.forRoot(),
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCardModule,
     HomeModule
   ],
   providers: [],

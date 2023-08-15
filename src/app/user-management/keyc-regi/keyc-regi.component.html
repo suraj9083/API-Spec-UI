@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <app-header class="head"></app-header>
+    <div class="registration-container">
+        <h2>Register</h2>
+        <form [formGroup]="regiForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" required>
+                <!-- Add a validation message for the required field -->
+                <div *ngIf="regiForm.get('firstName')?.hasError('required') && regiForm.get('firstName')?.touched"
+                    class="error-message error-red error-left">
+                    First Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" required>
+                <!-- Add a validation message for the required field -->
+                <div *ngIf="regiForm.get('lastName')?.hasError('required') && regiForm.get('lastName')?.touched"
+                    class="error-message error-red error-left">
+                    Last Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" formControlName="email" required>
+                <!-- Add a validation message for the required field -->
+                <div *ngIf="regiForm.get('email')?.hasError('required') && regiForm.get('email')?.touched"
+                    class="error-message error-red error-left">
+                    Email is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" required>
+                <!-- Add a validation message for the required field -->
+                <div *ngIf="regiForm.get('password')?.hasError('required') && regiForm.get('password')?.touched"
+                    class="error-message error-red error-left">
+                    Password is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Confirm Password"
+                    formControlName="confpassword" required>
+                <!-- Add a validation message for the required field -->
+                <div *ngIf="regiForm.get('confpassword')?.hasError('required') && regiForm.get('confpassword')?.touched"
+                    class="error-message error-red error-left">
+                    Confirm Password is required.
+                </div>
+                <!-- Add a validation message for password matching -->
+                <div *ngIf="regiForm.get('confpassword')?.hasError('passwordsNotMatch') && regiForm.get('confpassword')?.touched"
+                    class="error-message error-red error-left">
+                    Passwords do not match.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="submitBtn">Register</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="/login">Login</a></p>
+    </div>
+
+</body>
+
+</html>

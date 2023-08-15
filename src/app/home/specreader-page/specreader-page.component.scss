@@ -12,7 +12,7 @@ body {
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
-    // overflow-y: scroll;
+    overflow-y: scroll;
 
 }
 
@@ -91,19 +91,34 @@ body {
         font-size: 1.2rem;
         padding: 15px;
     }
+}
 
-    button {
-        background: transparent;
-        width: 86px;
-        height: 37px;
-        border: 1px solid #800080;
-        color: white;
-        border-radius: 20px;
-        font-size: 1.2rem;
-        margin-left: 234px;
-        margin-top: 1.2rem;
-        cursor: pointer;
-    }
+.submit {
+    background: transparent;
+    width: 86px;
+    height: 37px;
+    border: 1px solid #800080;
+    color: white;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    margin-left: 234px;
+    margin-top: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+.submit:hover {
+    background-color: #800080;
+    color: #fff;
+    transform: scale(1.03);
+}
+
+.submit:disabled {
+    background-color: #ccc;
+    border-color: #999;
+    color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .wantBtn {
@@ -238,9 +253,9 @@ h6 {
     padding: 20px;
     text-align: center;
     cursor: pointer;
-  }
-  
-  .drop-message {
+}
+
+.drop-message {
     display: block;
     margin-bottom: 10px;
-  }
+}

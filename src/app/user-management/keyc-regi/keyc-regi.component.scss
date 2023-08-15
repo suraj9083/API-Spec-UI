@@ -1,0 +1,129 @@
+.head {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+body {
+    background-color: #000000;
+    background-image: linear-gradient(147deg, #2c2929 0%, #2c3e50 74%);
+    color: white;
+    position: relative;
+    min-height: 100vh;
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    overflow-y: scroll;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.registration-container {
+    width: 320px;
+    margin: 160px auto 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 90%;
+    padding: 8px;
+    /* Adjusted padding */
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.error-red {
+    color: #c95d5d;
+}
+
+.error-left {
+    text-align: left;
+    margin-left: 10px;
+}
+
+::ng-deep .snackbar {
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+::ng-deep .snackbar .mat-snack-bar-action {
+    color: #fff;
+    font-weight: bold;
+}
+
+input:focus {
+    border: 1px solid white;
+    outline: none;
+}

@@ -13,6 +13,13 @@
 </head>
 
 <body>
+    <ngx-loading [show]="loading" [config]="{
+        fullScreenBackdrop: true,
+        primaryColour: '#ffffff',
+        secondaryColour: '#cccccc',
+        tertiaryColour: '#dddddd',
+        backdropBorderRadius: '3px'
+      }"></ngx-loading>
     <app-header></app-header>
     <div class="container">
         <div class="file">
@@ -24,7 +31,7 @@
                     (change)="onFileSelected($event)">
                 <input type="text" id="file-name" readonly>
             </form>
-            <button *ngIf="submitBtn" (click)="onSubmit();">Submit</button>
+            <button *ngIf="submitBtn" class="submit" [disabled]="disableBtn" (click)="onSubmit();">Submit</button>
         </div>
         <ng-container *ngIf="routes">
             <div class="content">
