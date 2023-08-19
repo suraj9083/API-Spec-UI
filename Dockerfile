@@ -5,13 +5,13 @@ FROM node:14 AS builder
 WORKDIR /app
 
 # Copy the package.json and package-lock.json to the container
-COPY angular-app/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the entire application code to the container
-COPY angular-app/ .
+COPY .
 
 # Build the Angular application
 RUN npm run build
