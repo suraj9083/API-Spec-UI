@@ -1,32 +1,20 @@
 # Use the official Node.js image as the base image
-FROM node:14 AS builder
+FROM node:14
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the package.json and package-lock.json to the container
+# Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-# Install dependencies
+# Install the project dependencies
 RUN npm install
 
-# Copy the entire application code to the container
-COPY .
+# Copy the rest of the application code to the container
+COPY . .
 
-# Build the Angular application
-RUN npm run build
-
-# Use a lightweight Node.js image to serve the application
-FROM node:14-alpine
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the built application from the builder stage to this stage
-COPY --from=builder /app/dist ./dist
-
-# Expose the port on which the application will run (Angular's default is 4200)
+# Expose the default Angular port (4200)
 EXPOSE 4200
 
-# Command to start the application
-CMD ["node", "./dist/main.js"]
+# Start the Angular development server
+CMD ["npm", "start"]
