@@ -4,24 +4,25 @@ import { RegisterComponent } from './register/register.component';
 import { MfaComponent } from './mfa/mfa.component';
 import { LoginComponent } from './login/login.component';
 import { KeycRegiComponent } from './keyc-regi/keyc-regi.component';
+import { AuthGuard } from '../utility/app.guard';
 
 const routes: Routes = [
-  {
-    path: 'register',
-    component: RegisterComponent
-  },
+  // {
+  //   path: 'register',
+  //   component: RegisterComponent
+  // },
   {
     path: '',
     component: LoginComponent
   },
-  {
-    path: 'mfa',
-    component: MfaComponent
-  },
-  {
-    path: 'regi',
-    component: KeycRegiComponent
-  }
+  // {
+  //   path: 'mfa',
+  //   component: MfaComponent
+  // },
+  // {
+  //   path: 'regi',
+  //   component: KeycRegiComponent
+  // }
 ];
 
 @NgModule({

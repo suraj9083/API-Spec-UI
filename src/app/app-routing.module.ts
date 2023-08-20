@@ -13,10 +13,6 @@ const routes: Routes = [
     loadChildren: () => import('./user-management/user-management.module').then(mod => mod.UserManagementModule)
   },
   {
-    path: 'head',
-    component: HeaderComponent
-  },
-  {
     path: '**',
     component: PageNotFoundComponent
   }

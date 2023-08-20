@@ -30,6 +30,11 @@ body {
     }
 }
 
+.head {
+    position: absolute;
+    // top: 0;
+}
+
 .header {
     color: #800080;
     padding: 20px;
@@ -71,7 +76,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    // font-family: Arial, sans-serif;
     font-size: 1.2rem;
 }
 
@@ -82,10 +87,11 @@ body {
 }
 
 .file {
+    position: absolute;
     color: #fff;
     padding: 25px;
     margin-left: 20px;
-
+    top: 240px;
     p {
         margin-left: 40px;
         font-size: 1.2rem;
@@ -172,7 +178,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    font-family: Arial, sans-serif;
+    // font-family: Arial, sans-serif;
     resize: none;
     box-sizing: border-box;
 }
@@ -227,6 +233,9 @@ h6 {
     margin-top: 20px;
     margin-left: 92px;
     line-height: 2rem;
+    position: absolute;
+    bottom: 170px;
+    left: 20px;
 }
 
 .download-button {

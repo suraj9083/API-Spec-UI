@@ -49,11 +49,84 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    
+
 }
 
 @keyframes rotate {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.user-data {
+    position: absolute;
+    top: 95px;
+    right: -1200px;
+    font-size: 23px;
+    font-weight: bold;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: white;
+}
+
+.caard {
+    width: 5vw;
+    height: 27vh;
+    border: 1px solid white;
+    position: relative;
+    top: 5rem;
+    left: 90rem;
+    border-radius: 5px;
+}
+
+.logout {
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    align-items: center;
+    border: 1px solid white;
+    background: transparent;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover {
+    border: 1px solid red;
+    color: red;
+}
+
+ul {
+    background: transparent;
+    min-width: 74px;
+    height: 196px;
+    box-sizing: border-box;
+    position: fixed;
+}
+
+li {
+    list-style-type: none;
+    padding: 10px 0 10px 0px;
+    border-bottom: 1px solid #222;
+    transform: translateY(55px);
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 2px;
+    color: white;
+}
+
+
+li.active {
+    font-weight: bold;
+}
+
+li:not(.active):hover {
+    background: #2c2c2c;
+}
+
+li:hover,
+.active {
+    opacity: 1;
 }
