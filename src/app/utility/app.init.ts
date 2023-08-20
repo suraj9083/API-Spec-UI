@@ -11,7 +11,7 @@ export function initializeKeycloak(keycloak: KeycloakService) {
         //   clientId: 'angular'
         // },
         config: {
-          url: `http://${keycloakIP}:8080`,
+          url: `https://${keycloakIP}:8080`,
           realm: 'master',
           clientId: 'angular'
         },
