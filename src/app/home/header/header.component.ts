@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeaderComponent implements OnInit {
   name: any = "User";
-  keycloakIP = environment.keyIP;
+  keycloakIP: any = environment.keyIP;
 
   constructor(private keycloakService: KeycloakService, private keycloakAuthService: CustKeycloakService) { }
 
