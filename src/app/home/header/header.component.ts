@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       const postLogoutRedirectUri = 'http://localhost:4200' || 'https://api-spec-ui.vercel.app';
 
       // Manually perform the Keycloak logout with proper parameters
-      const logoutUrl = `http://${this.keycloakIP}:8080/realms/master/protocol/openid-connect/logout?id_token_hint=${idTokenHint}&post_logout_redirect_uri=${encodeURIComponent(postLogoutRedirectUri)}`;
+      const logoutUrl = `https://${this.keycloakIP}:8080/realms/master/protocol/openid-connect/logout?id_token_hint=${idTokenHint}&post_logout_redirect_uri=${encodeURIComponent(postLogoutRedirectUri)}`;
       window.location.href = logoutUrl;
     } else {
       // Handle the case when the token is invalid or expired
