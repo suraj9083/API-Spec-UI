@@ -1,5 +1,22 @@
-<body>  
+<body>
     <div class="header">
         <div class='box ease'></div>
     </div>
+    <div class="user-data">
+        Wellcome {{name}}
+        <button class="logout" (click)="logoutAndRedirect()">Logout</button>
+    </div>
+
+    <div class="caard">
+        <ul>
+            <li  [routerLink]="['/spec/edit']">Edit
+            </li>
+            <li [routerLink]="['/spec/reader']">
+                Read</li>
+        </ul>
+        
+    </div>
+    
+    
+
 </body>

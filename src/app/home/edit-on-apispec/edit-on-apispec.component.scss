@@ -3,7 +3,7 @@ body {
     display: grid;
     place-items: center;
     position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    // font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: #000000;
     background-image: linear-gradient(147deg, #2c2929 0%, #2c3e50 74%);
     animation: gradient 15s ease infinite;
@@ -81,7 +81,7 @@ body {
     border: 1px solid black;
     border-radius: 5px;
     font-size: 1rem;
-    font-family: Arial, sans-serif;
+    // font-family: Arial, sans-serif;
     resize: none;
     box-sizing: border-box;
 }
@@ -132,7 +132,7 @@ body {
     border: 1px solid black;
     border-radius: 5px;
     font-size: 1rem;
-    font-family: Arial, sans-serif;
+    // font-family: Arial, sans-serif;
     resize: none;
     box-sizing: border-box;
 }
@@ -260,7 +260,7 @@ body {
     background-color: #f8f8f8;
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    font-family: Arial, Helvetica, sans-serif;
+    // font-family: Arial, Helvetica, sans-serif;
 }
 
 // .key, .description, .reqname, .reqtype, .resname, .restype {
@@ -465,7 +465,7 @@ body {
     color: black;
     top: 23px;
     left: 21%;
-    font-family: monospace;
+    // font-family: monospace;
     font-size: 16px;
     font-weight: 600;
     word-break: break-word;
