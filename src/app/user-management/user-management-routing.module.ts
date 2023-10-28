@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { MfaComponent } from './mfa/mfa.component';
 import { LoginComponent } from './login/login.component';
-import { KeycRegiComponent } from './keyc-regi/keyc-regi.component';
-import { AuthGuard } from '../utility/app.guard';
+// import { KeycRegiComponent } from './keyc-regi/keyc-regi.component';
+// import { AuthGuard } from '../utility/app.guard';
 
 const routes: Routes = [
   // {
