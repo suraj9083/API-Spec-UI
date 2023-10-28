@@ -24,10 +24,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeModule } from './home/home.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card'; // Import MatCardModule
-import { AuthGuard } from './utility/app.guard';
-import { CustKeycloakService } from './service/cust-keycloak.service';
-import { initializeKeycloak } from './utility/app.init';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+// import { AuthGuard } from './utility/app.guard';
+// import { CustKeycloakService } from './service/cust-keycloak.service';
+// import { initializeKeycloak } from './utility/app.init';
+// import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 @NgModule({
   declarations: [
@@ -50,17 +50,17 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
     MatFormFieldModule,
     MatCardModule,
     HomeModule,
-    KeycloakAngularModule
+    // KeycloakAngularModule
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
-    AuthGuard,
-    CustKeycloakService],
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService],
+    // },
+    // AuthGuard,
+    // CustKeycloakService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
