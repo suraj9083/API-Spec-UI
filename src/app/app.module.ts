@@ -61,6 +61,7 @@ import { MatCardModule } from '@angular/material/card'; // Import MatCardModule
     // },
     // AuthGuard,
     // CustKeycloakService],
+    ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
